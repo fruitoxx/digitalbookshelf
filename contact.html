@@ -1,6 +1,56 @@
 <!doctype html>
 <html>
 <head>
+
+    <style>
+        body {
+            background-image: url('images/bgg.png');
+            background-size: cover;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        #body {
+            display:block;
+            justify-content: center;
+            align-items: center;
+            height: 140vh;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: -8px;
+            margin-bottom: 16px;
+        }
+ 
+
+        
+ 
+        
+    </style>
 	
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,35 +84,87 @@ background-size: cover;">
 			</li>
 		</ul>
 	</div>
-	<div id="body">
-		 
-		<form action="contact.html">
-			<input type="text" name="fname" id="fname"  placeholder="Name">
-			<input type="text" name="address" id="address" placeholder="address">
-			<input type="text" name="email" id="email" placeholder="email">
-			<input type="text" name="phone" id="phone" placeholder="phone number">
-			<textarea name="message" id="message" placeholder="message"></textarea>
-			<input type="submit" name="send" id="send" placeholder="send">
-		</form>
-	</div>
-	<div id="footer">
-		<div>
-			<p>&copy; 2023 by DigitalBookshelf. All rights reserved.</p>
-			<ul>
-				<li>
-					<a href=" " id="twitter">twitter</a>
-				</li>
-				<li>
-					<a href=" " id="facebook">facebook</a>
-				</li>
-				<li>
-					<a href="" id="googleplus">googleplus</a>
-				</li>
-				<li>
-					<a href=" " id="pinterest">pinterest</a>
-				</li>
-			</ul>
-		</div>
-	</div>
+    <div id="body">
+        <form id="myForm" action="contact.html" method="post">
+            <input type="text" name="fname" id="name" placeholder="Name">
+            <input type="text" name="address" id="address" placeholder="Address">
+            <input type="text" name="email" id="email" placeholder="Email">
+            <input type="text" name="phone" id="phone" placeholder="Phone Number">
+            <textarea name="message" id="message" placeholder="Message"></textarea>
+            <input type="submit" name="send" id="send" value="Send">
+        </form>
+    </div>
+    
+    <div id="footer">
+        <div>
+            <p>&copy; 2023 by DigitalBookshelf. All rights reserved.</p>
+            <ul>
+                <li>
+                    <a href="#" id="twitter">Twitter</a>
+                </li>
+                <li>
+                    <a href="#" id="facebook">Facebook</a>
+                </li>
+                <li>
+                    <a href="#" id="googleplus">Google Plus</a>
+                </li>
+                <li>
+                    <a href="#" id="pinterest">Pinterest</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('myForm').addEventListener('submit', function (event) {
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var address = document.getElementById('address').value;
+            var phone = document.getElementById('phone').value;
+    
+            var nameRegex = /^[a-zA-Z\s]+$/;
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+            var errors = [];
+    
+            if (!nameRegex.test(name)) {
+                errors.push('Invalid name. Only letters and spaces are allowed.');
+            }
+    
+            if (!emailRegex.test(email)) {
+                errors.push('Invalid email address.');
+            }
+    
+            if (address.trim() === '') {
+                errors.push('Address cannot be empty.');
+            }
+    
+            if (phone.trim() === '' || isNaN(phone) || phone.length !== 10) {
+                errors.push('Invalid phone number. Please enter a 10-digit number.');
+            }
+    
+            if (errors.length > 0) {
+                event.preventDefault(); // Prevent form submission
+                displayErrors(errors);
+            }
+        });
+    
+        function displayErrors(errors) {
+            var errorContainer = document.createElement('div');
+            errorContainer.className = 'error-message';
+    
+            errors.forEach(function (error) {
+                var errorMessage = document.createElement('p');
+                errorMessage.textContent = error;
+                errorContainer.appendChild(errorMessage);
+            });
+    
+            var form = document.getElementById('myForm');
+            form.appendChild(errorContainer);
+        }
+    </script>
 </body>
 </html>
+
+
+

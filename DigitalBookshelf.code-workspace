@@ -1,10 +1,11 @@
 {
 	"folders": [
 		{
-			"path": "../../musta/DigitalBookshelf"
+			"path": ".."
 		}
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "DigitalBookshelf"
+		"liveServer.settings.multiRootWorkspaceName": "DigitalBookshelf",
+		"liveServer.settings.port": 5501
 	}
 }
