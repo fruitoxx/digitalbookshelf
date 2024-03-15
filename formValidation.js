@@ -46,5 +46,5 @@ function displayErrors(errors) {
 
     var form = document.getElementById('myForm');
     form.appendChild(errorContainer); */
-}
+
  
